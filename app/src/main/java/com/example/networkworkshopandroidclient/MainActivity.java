@@ -2,6 +2,7 @@ package com.example.networkworkshopandroidclient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,14 +25,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final TextView textView = findViewById(R.id.textView);
         final Button button = findViewById(R.id.submit);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitText();
-            }
-        });
-        networkHandlerThread = new NetworkHandlerThread(textView);
-        networkHandlerThread.start();
+        NetworkHandlerAsyncTask at = new NetworkHandlerAsyncTask();
+        at.execute(textView);
+
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                submitText();
+//            }
+//        });
+//        networkHandlerThread = new NetworkHandlerThread(textView);
+//        networkHandlerThread.start();
 
     }
 
