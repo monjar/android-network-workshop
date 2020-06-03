@@ -18,22 +18,22 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
     private NetworkHandlerThread networkHandlerThread;
-
+    private NetworkHandlerAsyncTask at;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final TextView textView = findViewById(R.id.textView);
         final Button button = findViewById(R.id.submit);
-        NetworkHandlerAsyncTask at = new NetworkHandlerAsyncTask();
+        at = new NetworkHandlerAsyncTask();
         at.execute(textView);
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                submitText();
-//            }
-//        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitText();
+            }
+        });
 //        networkHandlerThread = new NetworkHandlerThread(textView);
 //        networkHandlerThread.start();
 
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitText() {
         final EditText editText = findViewById(R.id.editText);
-        networkHandlerThread.sendMessage(editText.getText().toString());
+//        networkHandlerThread.sendMessage(editText.getText().toString());
+        at.sendMessage(editText.getText().toString());
     }
 }
